@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Dancing+Script&display=swap');
+
+*{
+    font-family: 'Comfortaa', cursive;
+}
+.logo{
+    font-family: 'Dancing Script', cursive;
+}
+.information{
+    background-color: rgba(178, 178, 255, 0.5);
+}
+.cloud_1{
+    animation: cld_one infinite 200s;
+}
+.cloud_2{
+    animation: cld_two infinite 180s;
+}
+.cloud_3{
+    animation: cld_three infinite 30s;
+}
+@keyframes cld_one {
+    0%{
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(100vw);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+@keyframes cld_two {
+    0%{
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(100vw);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+@keyframes cld_three {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+.section{
+    background-image: url(/src/pages/images/pexels-pixabay-531756.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
