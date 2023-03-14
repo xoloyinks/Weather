@@ -8,13 +8,15 @@ export default function Weather() {
 
     const [location , setLocation] = useState([]);
     const [current , setCurrent] = useState([]);
+    const [icon , setIcon] = useState([]);
 
     useEffect(() => {
-        fetch("http://api.weatherapi.com/v1/current.json?key=c379f3114aa5430bbc7165817231303&q=Lagos, Nigeria&aqi=no")
+        fetch("https://api.weatherapi.com/v1/current.json?key=c379f3114aa5430bbc7165817231303&q=Canada&aqi=no")
         .then(res => res.json())
         .then((data) => {
-        setLocation(data.location);
-        setCurrent(data.current);
+            setLocation(data.location);
+            setCurrent(data.current);
+            setIcon(data.current.condition)
     })
     } ,[])
   return (
@@ -41,7 +43,7 @@ export default function Weather() {
                         {location.name}, {location.country}
                     </div>
                     <div className='flex items-center justify-center'>
-                        {/* <span><img src={current.condition.icon} alt="" /></span> */}
+                        <span><img src={icon.icon} alt="" /></span>
                         
                     </div>
                     <div className='font-bold flex items-center text-3xl p-3 rounded-[20px] w-[fit-content] mx-auto'>
