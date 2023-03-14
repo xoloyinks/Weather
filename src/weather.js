@@ -41,7 +41,7 @@ export default function Weather() {
                         {location.name}, {location.country}
                     </div>
                     <div className='flex items-center justify-center'>
-                        <span><img src={current.condition.icon} alt="" /></span>
+                        {/* <span><img src={current.condition.icon} alt="" /></span> */}
                         
                     </div>
                     <div className='font-bold flex items-center text-3xl p-3 rounded-[20px] w-[fit-content] mx-auto'>
