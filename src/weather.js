@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { BsThermometerHalf } from 'react-icons/bs'
+import { BsThermometerHalf, BsThermometerSun, BsThermometerSnow, BsThermometerLow } from 'react-icons/bs'
 import cloud_1 from './pages/images/clouds-svgrepo-com(1).svg';
 import cloud_2 from './pages/images/hand-drawn-clouds-svgrepo-com.svg';
 import cloud_3 from './pages/images/ufo-or-airplane-frontal-outline-between-clouds-svgrepo-com.svg';
+import partly from "./pages/images/pexels-pixabay-531756.jpg";
+import snow from "./pages/images/pexels-burak-the-weekender-1978126.jpg";
+import sun from "./pages/images/pexels-lisa-fotios-1107717.jpg";
+import rain from "./pages/images/pexels-jack-redgate-2929290.jpg";
+import thunder from "./pages/images/pexels-andre-furtado-1162251.jpg";
+import moderate_rain from "./pages/images/pexels-artem-saranin-1202841.jpg";
+
 
 export default function Weather() {
 
@@ -22,24 +29,64 @@ export default function Weather() {
             setIcon(data.current.condition)
     })
     } ,[city])
-
-    const forcast = (e) => {
-        
+    const text = icon.text;
+    var temp;
+    var bg_color;
+    var back;
+    var btn_color;
+    switch (text) {
+        case "Partly cloudy":
+            temp = <BsThermometerHalf color='whitesmoke' />;
+            back = partly;
+            bg_color = "rgba(178, 178, 255, 0.5)";
+            // btn_color = "white";
+            break;
+        case "Clear":
+            temp = <BsThermometerHalf color='whitesmoke' />;
+            back = partly;
+            bg_color = "rgba(178, 178, 255, 0.5)";
+            // btn_color = "white";
+             break;
+        case "Patchy light snow":
+            temp = <BsThermometerSnow />;
+            back = snow;
+            bg_color = "rgba(255, 255, 255 , 0.5)";
+            btn_color = "black";
+            break;
+        case "Sunny":
+            temp = <BsThermometerSun color='red' />;
+            back = sun;
+            bg_color = "rgba(247, 255, 14, 0.3)"
+            break;
+        case "Light rain":
+            temp =<BsThermometerLow />;
+            back = rain;
+        case "Moderate rain":
+            temp =<BsThermometerLow />;
+            back = moderate_rain;
+        case "Light rain shower":
+            temp =<BsThermometerLow />;
+            back = rain;
+        case "Patchy light rain with thunder":
+            temp =<BsThermometerLow />;
+            bg_color = "rgba(93, 138, 192, 0.8)";
+            // btn_color = ;
+            back = thunder;
     }
   return (
     <>
         <section className='relative z-50 w-screen h-screen'>
-            <div className='section absolute top-0 bottom-0 left-0 right-0'></div>
+            <div className='absolute top-0 bottom-0 left-0 right-0'><img src={back} alt="img" className='w-screen h-screen'/></div>
             <div className='absolute top-0 bottom-0 left-0 right-0 backdrop-blur-lg text-xl text-white bg-white/3'>
                 <div className=' px-3 py-4 text-2xl z-50 font-semibold'>
                     Cloud x
                 </div>
                 <br />
                 <div className='px-3 py-4 flex flex-col gap-3'>
-                    <p><input type="text" onChange={(e) => setDevcity(e.target.value)} value={devCity} placeholder='Enter location here...' className='input p-3 text-sm text-black font-bold w-full rounded' /></p>
-                    <button onClick={() => {setCity(devCity)}} className='px-8 py-4 w-[fit-content] mx-auto bg-transparent border-2 border-white rounded-full text-sm hover:bg-white hover:text-black'>Check</button>
+                    <p><input type="text" onChange={(e) => setDevcity(e.target.value)} value={devCity} placeholder='Enter location here...' style={{backgroundColor:bg_color}} className='input p-3 text-sm text-black font-bold w-full rounded' /></p>
+                    <button onClick={() => {setCity(devCity)}} className='px-8 py-4 w-[fit-content] mx-auto bg-transparent border-2 border-white rounded-full text-sm hover:bg-white hover:text-black' style={{color:btn_color}} >Check</button>
                 </div>
-                <div className='w-10/12 h-[auto] mx-auto rounded-[20px] information py-4 '>
+                <div className='w-10/12 h-[auto] mx-auto rounded-[20px] information py-4 ' style={{backgroundColor:bg_color }}>
 
                     <div className='text-black font-bold text-2xl text-center py-3'>
                         {location.name} <br /> {location.country}
@@ -49,10 +96,12 @@ export default function Weather() {
                         
                     </div>
                     <div className='text-center'>
-                        <span className='font-semibold text-sm  '>{icon.text}</span>
+                        <span className='font-semibold text-sm  '>{text}</span>
                     </div>
                     <div className='font-bold flex items-center text-3xl p-3 rounded-[20px] w-[fit-content] mx-auto'>
-                        <span><BsThermometerHalf color='red' className='mx-auto mb-5 text-5xl' /> </span>
+                        <span>
+                            {temp}
+                        </span>
                         <span className='border-r-2 border-gray pr-3 mr-3'>{current.temp_c}&#8451;</span>
                         <span>{current.temp_f}&#8457;</span>
                         
