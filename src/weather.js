@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BsThermometerHalf, BsThermometerSun, BsThermometerSnow, BsThermometerLow } from 'react-icons/bs'
+import { BsThermometerHalf, BsThermometerSun, BsThermometerSnow, BsThermometerLow } from 'react-icons/bs';
+import { GiWhirlwind, GiSunRadiations } from 'react-icons/gi';
 import cloud_1 from './pages/images/clouds-svgrepo-com(1).svg';
 import cloud_2 from './pages/images/hand-drawn-clouds-svgrepo-com.svg';
 import cloud_3 from './pages/images/ufo-or-airplane-frontal-outline-between-clouds-svgrepo-com.svg';
@@ -30,6 +31,8 @@ export default function Weather() {
     })
     } ,[city])
     const text = icon.text;
+    const uv = current.uv;
+    const wind = current.wind_kph;
     var temp;
     var bg_color;
     var back;
@@ -59,14 +62,15 @@ export default function Weather() {
             bg_color = "rgba(247, 255, 14, 0.3)"
             break;
         case "Light rain":
+        case "Thundery outbreaks possible":
+        case "Moderate or heavy rain with thunder":
+        case "Patchy rain possible":
+        case "Light rain shower":
             temp =<BsThermometerLow />;
             back = rain;
         case "Moderate rain":
             temp =<BsThermometerLow />;
             back = moderate_rain;
-        case "Light rain shower":
-            temp =<BsThermometerLow />;
-            back = rain;
         case "Patchy light rain with thunder":
             temp =<BsThermometerLow />;
             bg_color = "rgba(93, 138, 192, 0.8)";
@@ -107,9 +111,23 @@ export default function Weather() {
                         
                     </div>
                     <div className='text-sm text-center'>
-                    <span>{location.localtime}</span>
+                        <span>{location.localtime}</span>
                     </div>
                     
+                </div>
+                <div className='p-5 text-sm mt-10 mx-5 rounded-full flex justify-between items-center ' style={{backgroundColor:bg_color }}>
+                <span className='flex items-center'>
+                        <span className='rounded-full p-3 bg-black mr-2 text-xl'> <GiSunRadiations color='white' /></span> 
+                        <span className='text-black font-bold'> UV index</span>
+                    </span>
+                    <span className='font-bold text-black'>{uv <= 2 ? "Low" : uv <= 7 ? "Moderate" : "High"  }</span>
+                </div>
+                <div className='p-5 text-sm mt-5 mx-5 rounded-full flex justify-between items-center' style={{backgroundColor:bg_color }}>
+                    <span className='flex items-center'>
+                        <span className='rounded-full p-3 bg-black mr-2 text-xl'> <GiWhirlwind color='white' /></span> 
+                        <span className='text-black font-bold'> Wind</span>
+                    </span>
+                    <span className='font-bold text-black'>{wind}km/h</span>
                 </div>
             </div>
         </section>
