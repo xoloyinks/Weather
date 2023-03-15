@@ -5,11 +5,9 @@ import cloud_1 from './pages/images/clouds-svgrepo-com(1).svg';
 import cloud_2 from './pages/images/hand-drawn-clouds-svgrepo-com.svg';
 import cloud_3 from './pages/images/ufo-or-airplane-frontal-outline-between-clouds-svgrepo-com.svg';
 import partly from "./pages/images/pexels-pixabay-531756.jpg";
-import snow from "./pages/images/pexels-burak-the-weekender-1978126.jpg";
+import moderate from "./pages/images/pexels-aleksejs-bergmanis-681391.jpg";
 import sun from "./pages/images/pexels-lisa-fotios-1107717.jpg";
-import rain from "./pages/images/pexels-jack-redgate-2929290.jpg";
-import thunder from "./pages/images/pexels-andre-furtado-1162251.jpg";
-import moderate_rain from "./pages/images/pexels-artem-saranin-1202841.jpg";
+
 
 
 export default function Weather() {
@@ -37,45 +35,35 @@ export default function Weather() {
     var bg_color;
     var back;
     var btn_color;
-    switch (text) {
-        case "Partly cloudy":
-            temp = <BsThermometerHalf color='whitesmoke' />;
-            back = partly;
-            bg_color = "rgba(178, 178, 255, 0.5)";
-            // btn_color = "white";
-            break;
-        case "Clear":
+    switch (uv) {
+        case 0:
+        case 1:
+        case 2:
             temp = <BsThermometerHalf color='whitesmoke' />;
             back = partly;
             bg_color = "rgba(178, 178, 255, 0.5)";
             // btn_color = "white";
              break;
-        case "Patchy light snow":
-            temp = <BsThermometerSnow />;
-            back = snow;
-            bg_color = "rgba(255, 255, 255 , 0.5)";
-            btn_color = "black";
-            break;
-        case "Sunny":
+        case 3:
+        case 4:
+            temp = <BsThermometerHalf color='whitesmoke' />;
+            back = partly;
+            bg_color = "rgba(178, 178, 255, 0.5)";
+            // btn_color = "white";
+             break;
+        case 5:
+        case 6:
+        case 7:
+            temp = <BsThermometerSun color='red' />;
+            back = moderate;
+        case 8:
+        case 9:
+        case 10:
             temp = <BsThermometerSun color='red' />;
             back = sun;
             bg_color = "rgba(247, 255, 14, 0.3)"
             break;
-        case "Light rain":
-        case "Thundery outbreaks possible":
-        case "Moderate or heavy rain with thunder":
-        case "Patchy rain possible":
-        case "Light rain shower":
-            temp =<BsThermometerLow />;
-            back = rain;
-        case "Moderate rain":
-            temp =<BsThermometerLow />;
-            back = moderate_rain;
-        case "Patchy light rain with thunder":
-            temp =<BsThermometerLow />;
-            bg_color = "rgba(93, 138, 192, 0.8)";
-            // btn_color = ;
-            back = thunder;
+        
     }
   return (
     <>
