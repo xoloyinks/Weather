@@ -115,14 +115,14 @@ export default function Weather() {
                     </div>
                     
                 </div>
-                <div className='p-5 text-sm mt-10 mx-5 rounded-full flex justify-between items-center ' style={{backgroundColor:bg_color }}>
+                <div className='px-5 py-3 text-sm mt-10 mx-5 rounded-full flex justify-between items-center ' style={{backgroundColor:bg_color }}>
                 <span className='flex items-center'>
                         <span className='rounded-full p-3 bg-black mr-2 text-xl'> <GiSunRadiations color='white' /></span> 
                         <span className='text-black font-bold'> UV index</span>
                     </span>
                     <span className='font-bold text-black'>{uv <= 2 ? "Low" : uv <= 7 ? "Moderate" : "High"  }</span>
                 </div>
-                <div className='p-5 text-sm mt-5 mx-5 rounded-full flex justify-between items-center' style={{backgroundColor:bg_color }}>
+                <div className='px-5 py-3 text-sm mt-5 mx-5 rounded-full flex justify-between items-center' style={{backgroundColor:bg_color }}>
                     <span className='flex items-center'>
                         <span className='rounded-full p-3 bg-black mr-2 text-xl'> <GiWhirlwind color='white' /></span> 
                         <span className='text-black font-bold'> Wind</span>
