@@ -24,7 +24,6 @@
 .section{
     background-image: url(/src/pages/images/pexels-pixabay-531756.jpg);
     background-size: cover;
-    background-color: rgb(255, 255, 255 , 0.8);
     background-repeat: no-repeat;
 }
 
@@ -33,4 +32,7 @@
 }
 .input::placeholder{
     color:black;
+}
+da{
+    background-color: rgb(220, 110, 110);
 }
