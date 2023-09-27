@@ -23,6 +23,7 @@ export default function Weather() {
    
 
 
+    // Geting User Location
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
             setLatitude(position.coords.latitude);
@@ -30,6 +31,7 @@ export default function Weather() {
         })    
     })
 
+    // Fetching user Location based on geolocation
     useEffect(() => {
         async function fetchLocation(){
             let detect_location = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_GET_LOCATION_KEY}`;
@@ -41,6 +43,7 @@ export default function Weather() {
         fetchLocation();
    })
 
+    // Fetching Weather conditions based on that location
     useEffect(() => {
             async function fetchData(){
                 if(city === "") return;
