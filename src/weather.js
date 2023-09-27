@@ -31,10 +31,7 @@ export default function Weather() {
     })
 
     useEffect(() => {
-        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-        const delayTime = 5000;
         async function fetchLocation(){
-            // await delay(delayTime);
             let detect_location = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_GET_LOCATION_KEY}`;
             let response = await fetch(detect_location);
             let response_data = await response.json();
