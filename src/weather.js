@@ -16,7 +16,6 @@ export default function Weather() {
     const [city , setCity] = useState("");
     const [error , setError] = useState("");
 
-    const [userLocation, setUserLocation] = useState();
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
 
@@ -121,8 +120,11 @@ export default function Weather() {
                         <button onClick={() => setCity(devCity)} className='px-8 py-4 w-[fit-content] mx-auto bg-transparent border-2 border-white rounded-full text-sm hover:bg-white hover:text-black md:px-5 md:py-3 max-[390px]:py-2 max-[390px]:px-3 max-[390px]:text-[11px]' style={{color:btn_color}} >Check</button>
                     </div>
                 </div>
+                {/* Error Information */}
                 <p className='text-center mx-auto text-[11px] w-10/12  bg-black rounded-full md:w-5/12'>{error}</p>
+
                 <br className='hidden md:block' />
+
                 <div className='w-10/12 h-[auto] mx-auto rounded-[20px] information py-4 max-[390px]:py-2 md:w-5/12' style={{backgroundColor:bg_color }}>
 
                     <div className='py-3 text-2xl max-[390px]:text-xl font-bold text-center text-black md:flex md:justify-center'>
