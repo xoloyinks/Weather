@@ -16,28 +16,24 @@ export default function Weather() {
     const [city , setCity] = useState("");
     const [error , setError] = useState("");
 
-    const [latitude, setLatitude] = useState();
-    const [longitude, setLongitude] = useState();
+    // const [latitude, setLatitude] = useState("");
+    // const [longitude, setLongitude] = useState("");
 
-   
-
-
-    // Geting User Location
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setLatitude(position.coords.latitude);
-            setLongitude(position.coords.longitude);
-        })    
-    })
+    const [endPoint, setEndPoint] = useState();
 
     // Fetching user Location based on geolocation
     useEffect(() => {
         async function fetchLocation(){
-            let detect_location = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_GET_LOCATION_KEY}`;
+            navigator.geolocation.getCurrentPosition((position) => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                setEndPoint(`http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_GET_LOCATION_KEY}`);
+            });
+           
+            let detect_location = endPoint;
             let response = await fetch(detect_location);
             let response_data = await response.json();
             setCity(response_data[0].name);
-            
         }
         fetchLocation();
    })
