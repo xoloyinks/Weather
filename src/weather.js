@@ -126,7 +126,6 @@ export default function Weather() {
                 <div className='w-10/12 h-[auto] mx-auto rounded-[20px] information py-4 max-[390px]:py-2 md:w-5/12' style={{backgroundColor:bg_color }}>
 
                     <div className='py-3 text-2xl max-[390px]:text-xl font-bold text-center text-black md:flex md:justify-center'>
-                        
                         <p>{location.name},</p>  <p className='md:ml-3'>{location.country}</p>
                     </div>
                     <div className='flex items-center justify-center icon'>
