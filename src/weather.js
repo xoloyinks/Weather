@@ -16,12 +16,11 @@ export default function Weather() {
     const [city , setCity] = useState("Lagos");
     const [error , setError] = useState("");
 
-    // let specified_location = useRef("");
 
     useEffect(() => {
             async function fetchData(){
                 if(city === "") return;
-                let response = await fetch(`https://api.weatherapi.com/v1/current.json?key=c379f3114aa5430bbc7165817231303&q=${city}&aqi=no`);
+                let response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}=${city}&aqi=no`);
                 let response_status = response.status;
                 let data = await response.json();
                 if(response_status === 200){
@@ -29,7 +28,7 @@ export default function Weather() {
                     setCurrent(data.current);
                     setIcon(data.current.condition);
                     setError("");
-                    console.log(data);
+                    // console.log(data);
                 }else{
                     setError(data.error.message);
                 }
@@ -90,7 +89,6 @@ export default function Weather() {
                     <div className='z-50 px-3 py-10 max-[390px]:py-5 text-2xl font-semibold text-gray-200 max-[390px]:text-xl'>
                         Cloud x
                     </div>
-                    {/* <br className='hidden sm:hidden' /> */}
                     <div className='flex flex-col gap-3 px-3 py-4 md:flex md:w-6/12 md:flex-row md:items-center'>
                         <p className='text-center md:w-9/12'><input type="text" onChange={(e) => setDevcity(e.target.value)} value={devCity} placeholder='Enter location here...' style={{backgroundColor:bg_color}} className='w-11/12 p-3 mx-auto text-sm max-[390px]:text-[11px] max-[390px]:py-2 font-bold text-black rounded input' /></p>
                        
