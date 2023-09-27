@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { BsThermometerHalf, BsThermometerSun} from 'react-icons/bs';
 import { GiWhirlwind, GiSunRadiations } from 'react-icons/gi';
 import partly from "./pages/images/pexels-pixabay-531756.jpg";
@@ -14,22 +14,30 @@ export default function Weather() {
     const [icon , setIcon] = useState([]);
     const [devCity, setDevcity] = useState("");
     const [city , setCity] = useState("Lagos");
+    const [error , setError] = useState("");
+
+    // let specified_location = useRef("");
 
     useEffect(() => {
-        if(city === "") return;
-        try{
-            fetch(`https://api.weatherapi.com/v1/current.json?key=c379f3114aa5430bbc7165817231303&q=${city}&aqi=no`)
-            .then(res => res.json())
-            .then((data) => {
-                setLocation(data.location || "Invalid Location");
-                setCurrent(data.current || "Invalid location");
-                setIcon(data.current.condition || "");
-                console.log(data)
-        })
-        }catch{
-            console.log("unknown command");
-        }
-    } ,[city])
+            async function fetchData(){
+                if(city === "") return;
+                let response = await fetch(`https://api.weatherapi.com/v1/current.json?key=c379f3114aa5430bbc7165817231303&q=${city}&aqi=no`);
+                let response_status = response.status;
+                let data = await response.json();
+                if(response_status === 200){
+                    setLocation(data.location);
+                    setCurrent(data.current);
+                    setIcon(data.current.condition);
+                    setError("");
+                    console.log(data);
+                }else{
+                    setError(data.error.message);
+                }
+            }
+            fetchData();
+    }, [city]);
+        
+        
 
     const text = icon.text;
     const uv = current.uv;
@@ -85,13 +93,16 @@ export default function Weather() {
                     {/* <br className='hidden sm:hidden' /> */}
                     <div className='flex flex-col gap-3 px-3 py-4 md:flex md:w-6/12 md:flex-row md:items-center'>
                         <p className='text-center md:w-9/12'><input type="text" onChange={(e) => setDevcity(e.target.value)} value={devCity} placeholder='Enter location here...' style={{backgroundColor:bg_color}} className='w-11/12 p-3 mx-auto text-sm max-[390px]:text-[11px] max-[390px]:py-2 font-bold text-black rounded input' /></p>
-                        <button onClick={() => {setCity(devCity)}} className='px-8 py-4 w-[fit-content] mx-auto bg-transparent border-2 border-white rounded-full text-sm hover:bg-white hover:text-black md:px-5 md:py-3 max-[390px]:py-2 max-[390px]:px-3 max-[390px]:text-[11px]' style={{color:btn_color}} >Check</button>
+                       
+                        <button onClick={() => setCity(devCity)} className='px-8 py-4 w-[fit-content] mx-auto bg-transparent border-2 border-white rounded-full text-sm hover:bg-white hover:text-black md:px-5 md:py-3 max-[390px]:py-2 max-[390px]:px-3 max-[390px]:text-[11px]' style={{color:btn_color}} >Check</button>
                     </div>
                 </div>
+                <p className='text-center mx-auto text-[11px] w-10/12  bg-black rounded-full md:w-5/12'>{error}</p>
                 <br className='hidden md:block' />
                 <div className='w-10/12 h-[auto] mx-auto rounded-[20px] information py-4 max-[390px]:py-2 md:w-5/12' style={{backgroundColor:bg_color }}>
 
                     <div className='py-3 text-2xl max-[390px]:text-xl font-bold text-center text-black md:flex md:justify-center'>
+                        
                         <p>{location.name},</p>  <p className='md:ml-3'>{location.country}</p>
                     </div>
                     <div className='flex items-center justify-center icon'>
