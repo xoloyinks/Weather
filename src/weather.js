@@ -28,7 +28,6 @@ export default function Weather() {
                     setCurrent(data.current);
                     setIcon(data.current.condition);
                     setError("");
-                    // console.log(data);
                 }else{
                     setError(data.error.message);
                 }
